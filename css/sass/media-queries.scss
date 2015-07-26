@@ -1,0 +1,197 @@
+// desktop: ~58% of traffic
+// > 90% of users on desktop have screens > 1200px wide
+// remainder have screens > 1020px
+// mobile: ~25% of traffic
+// mobile has a long tail but ~70% is in the 320x480 to 375x667 range
+// tablet: ~17% of traffic
+// tablet heavily concentrated (~79%) at 768x1024. Then 1280x800 and another very long tail
+/*----------------------------------------------------=BREAKPOINT MAP */
+$breakpoints: (
+  'x-small' : 0,
+  'small'   : 500px,
+  'medium'  : 760px, 
+  'large'   : 1020px, 
+  'x-large' : 1200px
+);
+$breakpoint-small : #{map-get($breakpoints, "small")};
+$breakpoint-medium : #{map-get($breakpoints, "medium")};
+$breakpoint-large : #{map-get($breakpoints, "large")};
+$breakpoint-x-large : #{map-get($breakpoints, "x-large")};
+
+/// Mixins to manage responsive breakpoints
+/// based on http://www.sitepoint.com/managing-responsive-breakpoints-sass/
+/// with additional from http://jakearchibald.github.io/sass-ie/
+
+// set this flag in sdi_ie8.scss to the width you want to assume for IE8 and below
+// for our users == 1024px
+$noMediaQueriesWidth: false !default;
+
+// MIN-WIDTH MEDIA QUERIES -- MOST COMMON
+// Except in special caes this is the media query we should use
+
+// the enclosed styles will be applied to this view and up
+// EXAMPLE: @include view-is-at-least('small') : styles will be applied starting at 500px
+@mixin view-is-at-least($breakpoint) {
+
+	// if the key exists in the map
+	@if map-has-key($breakpoints, $breakpoint) {
+		//if we're outputting for non-media-query-browser (lookin' at you, IE8!)
+		@if $noMediaQueriesWidth {
+			// and if the width we're targeting is greater than the breakpoint
+			// in our case ie8 will get small, medium, and large styles but not x-large
+			@if $noMediaQueriesWidth >= map-get($breakpoints, $breakpoint){
+				// just output the content
+				@content;
+			}
+
+		} @else {
+			// else (for modern browsers) output a media query based on the $breakpoint, containing the content
+			@media (min-width: map-get($breakpoints, $breakpoint)) {
+				@content;
+			}
+		}
+
+	} @else { // If the key doesn't exist in the map
+		@warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+		+ "Available breakpoints are: #{map-keys($breakpoints)}.";
+	}
+}
+
+// MIN-WIDTH TO MAX-WIDTH MEDIA QUERIES
+
+// the enclosed styles will be applied from the "min" view to the "max" view
+// EXAMPLE: @include view-is-between('small', 'medium') : styles will be applied from 500px to 759px ('medium' breakpoint - 1)
+@mixin view-is-between($breakpointMin, $breakpointMax) {
+
+	// if the key exists in the map
+	@if map-has-key($breakpoints, $breakpointMin) {
+		@if map-has-key($breakpoints, $breakpointMax) {
+			//if we're outputting for non-media-query-browser (lookin' at you, IE8!)
+			@if $noMediaQueriesWidth {
+				// and if the width we're targeting is greater than the min breakpoint but less than the max breakpoint
+				// in our case ie8 will get small, medium, and large styles but not x-large
+				@if $noMediaQueriesWidth >= map-get($breakpoints, $breakpointMin) and $noMediaQueriesWidth <= map-get($breakpoints, $breakpointMax){
+					// just output the content
+					@content;
+				}
+
+			} @else {
+				// else (for modern browsers) output a media query based on the min and max breakpoints, containing the content
+				@media (min-width: map-get($breakpoints, $breakpointMin)) and (max-width: (map-get($breakpoints, $breakpointMax) - 1)) {
+					@content;
+				}
+			}
+
+		} @else { // If the breakpointMax key doesn't exist in the map
+			@warn "Unfortunately, no value could be retrieved from `#{$breakpointMax}`. "
+			+ "Available breakpoints are: #{map-keys($breakpoints)}.";
+		}
+
+	} @else { // If the breakpointMin key doesn't exist in the map
+		@warn "Unfortunately, no value could be retrieved from `#{$breakpointMin}`. "
+		+ "Available breakpoints are: #{map-keys($breakpoints)}.";
+	}
+
+}
+
+// MAX-WIDTH MEDIA QUERIES
+// the enclosed styles will be applied from 0 up to this view
+// EXAMPLE: @include view-is-less-than('medium') : styles will be applied from 0px to 759px ('medium' breakpoint - 1)
+@mixin view-is-less-than($breakpoint) {
+
+	// if the key exists in the map
+	@if map-has-key($breakpoints, $breakpoint) {
+		//if we're outputting for non-media-query-browser (lookin' at you, IE8!)
+		@if $noMediaQueriesWidth {
+			// and if the width we're targeting is greater than the breakpoint
+			// in our case ie8 will get small, medium, and large styles but not x-large
+			@if $noMediaQueriesWidth <= map-get($breakpoints, $breakpoint){
+				// just output the content
+				@content;
+			}
+
+		} @else {
+			// else (for modern browsers) output a media query based on the $breakpoint, containing the content
+			@media (max-width: (map-get($breakpoints, $breakpoint) - 1)) {
+				@content;
+			}
+		}
+
+	} @else { // If the key doesn't exist in the map
+		@warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+		+ "Available breakpoints are: #{map-keys($breakpoints)}.";
+	}
+}
+
+// DEPRECATED in favor of view-is-less-than
+// // MAX-WIDTH MEDIA QUERIES
+// // the enclosed styles will be applied from 0 up to and including this view
+// // EXAMPLE: @include view-is-at-most('small') : styles will be applied from 0px to 759px ('medium' breakpoint - 1)
+// @mixin view-is-at-most($breakpoint) {
+
+// 	// if the key exists in the map
+// 	@if map-has-key($breakpoints, $breakpoint) {
+// 		//if we're outputting for non-media-query-browser (lookin' at you, IE8!)
+// 		@if $noMediaQueriesWidth {
+// 			// and if the width we're targeting is greater than the breakpoint
+// 			// in our case ie8 will get small, medium, and large styles but not x-large
+// 			@if $noMediaQueriesWidth <= map-get($breakpoints, $breakpoint){
+// 				// just output the content
+// 				@content;
+// 			}
+
+// 		} @else {
+// 			// else (for modern browsers) output a media query based on the $breakpoint, containing the content
+// 			@media (max-width: (map-get($breakpoints, next-key($breakpoints, $breakpoint)) - 1)) {
+// 				@content;
+// 			}
+// 		}
+
+// 	} @else { // If the key doesn't exist in the map
+// 		@warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+// 		+ "Available breakpoints are: #{map-keys($breakpoints)}.";
+// 	}
+// }
+
+
+/* Breakpoint tester you can throw on any page to see where brakpoints are applying
+
+    <div class="breakpoint-tester"></div>
+*/
+$colors: (#5CB366, #A7ED65, #EEFB7C, #656AED, #80C7FB);
+.breakpoint-tester{
+  width: 100%;
+  height: 3em;
+  background-color: nth($colors, 1);
+  &:before{
+    display: block;
+    text-align: center;
+    background: rgba(255,255,255,.4);
+    content: "x-small: default/all";
+  }
+  @include view-is-at-least('small'){
+    background-color: nth($colors, 2);
+    &:before{
+      content: "small: > #{map-get($breakpoints, 'small')}";
+    }
+  }
+  @include view-is-at-least('medium'){
+    background-color: nth($colors, 3);
+    &:before{
+      content: "medium: > #{map-get($breakpoints, 'medium')}";
+    }
+  }
+  @include view-is-at-least('large'){
+    background-color: nth($colors, 4);
+    &:before{
+      content: "large: > #{map-get($breakpoints, 'large')}";
+    }
+  }
+   @include view-is-at-least('x-large'){
+    background-color: nth($colors, 5);
+    &:before{
+      content: "x-large: > #{map-get($breakpoints, 'x-large')}";
+    }
+  }
+
+}

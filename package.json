@@ -1,0 +1,28 @@
+{
+  "name": "media-queries",
+  "version": "1.0.0",
+  "description": "Media Queries: SASS Mixins and experimentation",
+  "main": "Gruntfile.js",
+  "dependencies": {},
+  "devDependencies": {
+    "chokidar": "~0.6.3",
+    "grunt": "~0.4.2",
+    "grunt-autoprefixer": "^1.0.1",
+    "grunt-contrib-sass": "^0.8.1",
+    "grunt-contrib-uglify": "~0.4.0",
+    "grunt-contrib-watch": "~0.5.3",
+    "path": "~0.4.9"
+  },
+  "scripts": {
+    "test": "/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "/"
+  },
+  "keywords": [
+    "/"
+  ],
+  "author": "@norabrowndesign",
+  "license": "Copyright Nora Brown"
+}
