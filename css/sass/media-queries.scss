@@ -1,10 +1,12 @@
-// desktop: ~58% of traffic
-// > 90% of users on desktop have screens > 1200px wide
-// remainder have screens > 1020px
-// mobile: ~25% of traffic
-// mobile has a long tail but ~70% is in the 320x480 to 375x667 range
-// tablet: ~17% of traffic
-// tablet heavily concentrated (~79%) at 768x1024. Then 1280x800 and another very long tail
+@charset "UTF-8";
+
+@-ms-viewport {
+    width: device-width;
+    }
+@viewport {
+    width: device-width;
+    }
+
 /*----------------------------------------------------=BREAKPOINT MAP */
 $breakpoints: (
   'x-small' : 0,
@@ -154,11 +156,24 @@ $noMediaQueriesWidth: false !default;
 // }
 
 
+$colors: (#5CB366, #A7ED65, #EEFB7C, #656AED, #80C7FB);
+
+
+body{
+	font-family: sans-serif;
+
+	@include view-is-at-least('small'){
+
+			font-size: 1.5em;
+
+		}
+	}
+
+
 /* Breakpoint tester you can throw on any page to see where brakpoints are applying
 
     <div class="breakpoint-tester"></div>
 */
-$colors: (#5CB366, #A7ED65, #EEFB7C, #656AED, #80C7FB);
 .breakpoint-tester{
   width: 100%;
   height: 3em;
@@ -193,5 +208,82 @@ $colors: (#5CB366, #A7ED65, #EEFB7C, #656AED, #80C7FB);
       content: "x-large: > #{map-get($breakpoints, 'x-large')}";
     }
   }
-
 }
+
+@include view-is-at-least('small'){
+	.hide-sm-up{
+		opacity: .2;
+	}
+}
+@include view-is-at-least('medium'){
+	.hide-md-up{
+		opacity: .2;
+	}
+}
+@include view-is-at-least('large'){
+	.hide-lg-up{
+		opacity: .2;
+	}
+}
+@include view-is-at-least('x-large'){
+	.hide-xl-up{
+		opacity: .2;
+	}
+}
+
+@include view-is-less-than('small'){
+	.hide-xs-only{
+		opacity: .2;
+	}
+}
+@include view-is-less-than('medium'){
+	.hide-sm-down{
+		opacity: .2;
+	}
+}
+@include view-is-less-than('large'){
+	.hide-md-down{
+		opacity: .2;
+	}
+}
+@include view-is-less-than('x-large'){
+	.hide-lg-down{
+		opacity: .2;
+	}
+}
+
+@include view-is-between('small','medium'){
+	.hide-sm-only{
+		opacity: .2;
+	}
+}
+@include view-is-between('medium','large'){
+	.hide-md-only{
+		opacity: .2;
+	}
+}
+@include view-is-between('large','x-large'){
+	.hide-lg-only{
+		opacity: .2;
+	}
+}
+
+@for $i from 1 through length($colors){
+	.background_#{$i} {
+		background: nth($colors, $i);
+	}
+}
+
+.wrap{
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: align-center;
+	}
+.wrap > *{
+	font-family: monospace;
+	padding: 1em;
+	flex: 1 1 25%;
+	text-align: center;
+	}
+
+

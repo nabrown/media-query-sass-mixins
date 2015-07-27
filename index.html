@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>Testing SASS Media Query Mixins</title>
-	<link rel="stylesheet" href="css/media-queries.css">
+	<link rel="stylesheet" href="css/media-queries-dev.css">
 	<!--[if IE]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
@@ -13,5 +13,29 @@
 
 	<h1>Testing SASS Media Query Mixins</h1>
 	<div class="breakpoint-tester"></div>
+
+	<h2><code>min-width</code> queries</h2>
+	<div class="wrap">
+		<div class="background_2 hide-sm-up">Hide on small and larger views</div>
+		<div class="background_3 hide-md-up">Hide on medium and larger views</div>
+		<div class="background_4 hide-lg-up">Hide on large and larger views</div>
+		<div class="background_5 hide-xl-up">Hide on x-large views</div>
+	</div>
+
+	<h2><code>max-width</code> queries</h2>
+	<div class="wrap">
+		<div class="background_1 hide-xs-only">Hide on extra-small views only</div>
+		<div class="background_2 hide-sm-down">Hide on small and smaller views</div>
+		<div class="background_3 hide-md-down">Hide on medium and smaller views</div>
+		<div class="background_4 hide-lg-down">Hide on large and smaller views</div>
+	</div>
+
+	<h2><code>min-width / max-width</code> queries</h2>
+	<div class="wrap">
+		<div class="background_2 hide-sm-only">Hide on small views only</div>
+		<div class="background_3 hide-md-only">Hide on medium views only</div>
+		<div class="background_4 hide-lg-only">Hide on large views only</div>
+	</div>
+
 </body>
 </html>
