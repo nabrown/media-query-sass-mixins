@@ -14,7 +14,34 @@
 	<h1>Testing SASS Media Query Mixins</h1>
 	<div class="breakpoint-tester"></div>
 
-	<h2><code>min-width</code> queries</h2>
+	<!-- SHOW -->
+	<h2>Show Things</h2>
+	<h3><code>min-width</code> queries</h3>
+	<div class="wrap">
+		<div class="background_2 show-sm-up">Show on small and larger views</div>
+		<div class="background_3 show-md-up">Show on medium and larger views</div>
+		<div class="background_4 show-lg-up">Show on large and larger views</div>
+		<div class="background_5 show-xl-up">Show on x-large views</div>
+	</div>
+
+	<h3><code>max-width</code> queries</h3>
+	<div class="wrap">
+		<div class="background_1 show-xs-only">Show on extra-small views only</div>
+		<div class="background_2 show-sm-down">Show on small and smaller views</div>
+		<div class="background_3 show-md-down">Show on medium and smaller views</div>
+		<div class="background_4 show-lg-down">Show on large and smaller views</div>
+	</div>
+
+	<h3><code>min-width / max-width</code> queries</h3>
+	<div class="wrap">
+		<div class="background_2 show-sm-only">Show on small views only</div>
+		<div class="background_3 show-md-only">Show on medium views only</div>
+		<div class="background_4 show-lg-only">Show on large views only</div>
+	</div>
+
+	<!-- HIDE -->
+	<h2>Hide Things</h2>
+	<h3><code>min-width</code> queries</h3>
 	<div class="wrap">
 		<div class="background_2 hide-sm-up">Hide on small and larger views</div>
 		<div class="background_3 hide-md-up">Hide on medium and larger views</div>
@@ -22,7 +49,7 @@
 		<div class="background_5 hide-xl-up">Hide on x-large views</div>
 	</div>
 
-	<h2><code>max-width</code> queries</h2>
+	<h3><code>max-width</code> queries</h3>
 	<div class="wrap">
 		<div class="background_1 hide-xs-only">Hide on extra-small views only</div>
 		<div class="background_2 hide-sm-down">Hide on small and smaller views</div>
@@ -30,12 +57,11 @@
 		<div class="background_4 hide-lg-down">Hide on large and smaller views</div>
 	</div>
 
-	<h2><code>min-width / max-width</code> queries</h2>
+	<h3><code>min-width / max-width</code> queries</h3>
 	<div class="wrap">
 		<div class="background_2 hide-sm-only">Hide on small views only</div>
 		<div class="background_3 hide-md-only">Hide on medium views only</div>
 		<div class="background_4 hide-lg-only">Hide on large views only</div>
 	</div>
-
 </body>
 </html>
