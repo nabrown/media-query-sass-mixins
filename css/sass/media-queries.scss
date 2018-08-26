@@ -125,35 +125,7 @@ $noMediaQueriesWidth: false !default;
 	}
 }
 
-// DEPRECATED in favor of view-is-less-than
-// // MAX-WIDTH MEDIA QUERIES
-// // the enclosed styles will be applied from 0 up to and including this view
-// // EXAMPLE: @include view-is-at-most('small') : styles will be applied from 0px to 759px ('medium' breakpoint - 1)
-// @mixin view-is-at-most($breakpoint) {
 
-// 	// if the key exists in the map
-// 	@if map-has-key($breakpoints, $breakpoint) {
-// 		//if we're outputting for non-media-query-browser (lookin' at you, IE8!)
-// 		@if $noMediaQueriesWidth {
-// 			// and if the width we're targeting is greater than the breakpoint
-// 			// in our case ie8 will get small, medium, and large styles but not x-large
-// 			@if $noMediaQueriesWidth <= map-get($breakpoints, $breakpoint){
-// 				// just output the content
-// 				@content;
-// 			}
-
-// 		} @else {
-// 			// else (for modern browsers) output a media query based on the $breakpoint, containing the content
-// 			@media (max-width: (map-get($breakpoints, next-key($breakpoints, $breakpoint)) - 1)) {
-// 				@content;
-// 			}
-// 		}
-
-// 	} @else { // If the key doesn't exist in the map
-// 		@warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
-// 		+ "Available breakpoints are: #{map-keys($breakpoints)}.";
-// 	}
-// }
 
 
 $colors: (#5CB366, #A7ED65, #EEFB7C, #656AED, #80C7FB);
